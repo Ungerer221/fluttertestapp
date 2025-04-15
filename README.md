@@ -9,6 +9,16 @@ To Learn How to Make a Fultter App using [Codelab](https://codelabs.developers.g
 
 # Setting up The project
 
+Follow the Flutter [Docs](https://docs.flutter.dev/get-started/install/windows/web) 
+
+1. download visual studio code
+2. dowload the flutter extension
+3. use vs code to download the flutter SDK
+4. select new project 
+5. download or locate SDK
+6. Add SDK to path
+    > should say the flutter SDK was added to you path when successful
+
 
 # Creating a Bloc and Cubit
 
