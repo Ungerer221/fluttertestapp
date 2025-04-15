@@ -2,6 +2,12 @@
 
 In this project i will be making my first flutter app following Codelab 
 
+# Credit
+
+Codelab
+
+https://codelabs.developers.google.com/codelabs/flutter-codelab-first#0
+
 # Resources
 
 Flutter [Docs](https://docs.flutter.dev/get-started/learn-flutter)
