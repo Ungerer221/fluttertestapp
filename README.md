@@ -19,6 +19,10 @@ Follow the Flutter [Docs](https://docs.flutter.dev/get-started/install/windows/w
 6. Add SDK to path
     > should say the flutter SDK was added to you path when successful
 7. Check by running Flutter doctor in `ctrl + shift + p` in vs code
+8. throug the command type flutter new and selecte new project 
+9. select application 
+10. Choos where you want the application 
+11. when complete then you can press f5 to run you app
 
 
 # Creating a Bloc and Cubit
