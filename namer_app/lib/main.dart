@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         title: 'Namer App', // the apps name
         theme: ThemeData(
           useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlue),
         ),
         home: MyHomePage(), // this is setting the home page of the app
       ),
@@ -36,7 +36,20 @@ class MyAppState extends ChangeNotifier {
   // ↓ Add this. - this is responsable for generating the next random word
   void getNext() {
     current = WordPair.random();
-    notifyListeners(); // "hey things that watch me know that i have changed" - basically 
+    notifyListeners(); // "hey things that watch me know that i have changed" - basically
+  }
+
+  // adding the faveriting functionality
+  var favorites =
+      <WordPair>[]; // the [] is a list - this list will only have wordpairs
+
+  void toggleFavorite() {
+    if (favorites.contains(current)) {
+      favorites.remove(current);
+    } else {
+      favorites.add(current);
+    }
+    notifyListeners(); // remember to notify listeners
   }
 }
 
@@ -45,23 +58,93 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
+    var pair = appState
+        .current; // <- before extractinght random word widget we have to change the appstate
+
+    // ↓ Add this.
+    IconData icon;
+    if (appState.favorites.contains(pair)) {
+      icon = Icons.favorite;
+    } else {
+      icon = Icons.favorite_border;
+    }
 
     // a Scaffold is a widget that provides sctructure
     return Scaffold(
-      body: Column(
-        children: [
-          Text('A random Amazing Totaly cool idea:'),
-          Text(appState.current.asLowerCase),
+      body: Center(
+        child: Column(
+          mainAxisAlignment:
+              MainAxisAlignment.center, // this will center in vertically
+          children: [
+            Text('A random Amazing Totaly cool idea:'),
 
-          // ↓ Add this.
-          ElevatedButton(
-            onPressed: () {
-              print('button pressed!');
-              appState.getNext(); //this activate the get next when the button is pressed
-            },
-            child: Text('Next'),
-          ),
-        ],
+            SizedBox(height: 10),
+
+            // Text(appState.current.asLowerCase), // we want to extrac this to a different widget (previouse version)
+            BigCard(
+                pair:
+                    pair), //<- this line now just depends on one single veriable and not on the app state itself - we did ctrl+. and selected extract widget and renamed it to BigCard
+
+            SizedBox(height: 20),
+
+            // ↓ Add this. -  this is the button
+            Row(
+              mainAxisSize: MainAxisSize
+                  .min, // to use the only what it needs in terms of space
+              children: [
+                ElevatedButton.icon(
+                  onPressed: () {
+                    print('toggled faverite');
+                    appState.toggleFavorite();
+                  },
+                  icon: Icon(icon),
+                  label: Text('Like'),
+                ),
+                SizedBox(width: 10),
+                ElevatedButton(
+                  onPressed: () {
+                    print('button pressed!');
+                    appState
+                        .getNext(); //this activate the get next when the button is pressed
+                  },
+                  child: Text('Next'),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// here is the new extracted widget - we refactored the code
+class BigCard extends StatelessWidget {
+  const BigCard({
+    super.key,
+    required this.pair,
+  });
+
+  final WordPair pair;
+
+  @override
+  Widget build(BuildContext context) {
+    var theme = Theme.of(
+        context); // similare to context.watch on line 47 - this theme.of asks from the top and watched ThemeData
+    var style = theme.textTheme.displayMedium!.copyWith(
+      color: theme.colorScheme.onPrimary,
+    );
+
+    // here we clicked on the Text element and did crtl+. and chose wrap with padding
+    return Card(
+      color: theme.colorScheme.primary, //this must come before the child
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Text(
+          pair.asLowerCase,
+          style: style,
+          semanticsLabel: pair.asPascalCase,
+        ), // this text should be in the style of style
       ),
     );
   }
