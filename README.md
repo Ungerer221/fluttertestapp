@@ -8,4 +8,5 @@ in this project I am setting up my first flutter app and in the project will be 
 # Creating a Bloc and Cubit
 
 The Bloc Main [GitHub](https://github.com/felangel/bloc/tree/master/packages/bloc)
-the flutter Bloc [Pub Dev](https://pub.dev/packages/flutter_bloc)
+
+The flutter Bloc [Pub Dev](https://pub.dev/packages/flutter_bloc)
