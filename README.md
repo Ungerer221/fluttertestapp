@@ -1,6 +1,11 @@
-# fluttertestapp
+# Fluttertestapp
 
-in this project I am setting up my first flutter app and in the project will be using the bloc and cubit Architecture for development of a Auto Cashier app
+In this project i will be making my first flutter app following Codelab 
+
+# Resources
+
+Flutter [Docs](https://docs.flutter.dev/get-started/learn-flutter)
+To Learn How to Make a Fultter App using [Codelab](https://codelabs.developers.google.com/codelabs/flutter-codelab-first#0)
 
 # Setting up The project
 
